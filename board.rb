@@ -4,8 +4,8 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = Array.new(8) {Array.new(8, Blank.instance)}
-    # populate
+    @blank = Blank.instance
+    populate_grid
   end
 
   def move(start, end_pos)
@@ -17,8 +17,29 @@ class Board
     end
   end
 
-  def populate
+  def populate_back_row(color)
+    row = (color == :white) ? 7 : 0
+    pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
+    pieces.each_with_index do |piece, col|
+      piece.new(color, @board, [row,col])
+    end
+
+  end
+
+  def populate_pawn(color)
+    row = (color == :white) ? 6 : 1
+    8.times do | col|
+      Pawn.new(color, @board, [row,col])
+    end
+  end
+
+  def populate_grid
+      @board = Array.new(8) {Array.new(8, Blank.instance)}
+      [:white, :black].each do |color|
+        populate_back_row(color)
+        populate_pawn(color)
+      end
   end
 
 end
