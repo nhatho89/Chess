@@ -8,7 +8,7 @@ class Display
   def initialize(board)
     @board = board
     @cursor_pos = [0, 0]
-    render
+
   end
 
   def render
@@ -18,7 +18,7 @@ class Display
         if @cursor_pos.first == idx1 && @cursor_pos.last == idx2
           print @board.board[@cursor_pos.first][@cursor_pos.last].symbol.colorize(:background => :red)
         elsif (idx1 + idx2).even?
-          print piece.symbol.colorize(:color => piece.color.to_sym, :background => :white)
+          print piece.symbol.colorize(:color => piece.color.to_sym, :background => :magenta)
         elsif (idx1 + idx2).odd?
           print piece.symbol.colorize(:color => piece.color.to_sym, :background => :blue)
         end

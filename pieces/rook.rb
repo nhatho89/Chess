@@ -5,7 +5,7 @@ class Rook < Piece
   include Sliding
 
   def symbol
-    '♜'.colorize(color)
+    ' ♜ '.colorize(color)
   end
 
   protected

@@ -15,7 +15,7 @@ class Game
     # @current_player = :white
   end
 
-  # def play
+  def play
   #   until board.checkmate?(current_player)
   #     begin
   #       from_pos, to_pos = players[current_player].make_move(board)
@@ -29,16 +29,16 @@ class Game
   #     end
   #   end
   #
-  #   display.render
+    @display.render
   #   puts "#{current_player} is checkmated."
   #
   #   nil
-  # end
+  end
 
 end
 
 
 if __FILE__ == $PROGRAM_NAME
   game = Game.new
-  p game.board
+  p game.play
 end

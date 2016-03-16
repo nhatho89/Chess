@@ -6,14 +6,14 @@ class Piece
   attr_accessor :pos
 
   def initialize(color, board, pos)
-    # raise 'invalid color' unless [:white, :black].include?(color)
+    raise 'invalid color' unless [:white, :black].include?(color)
     # raise 'invalid pos' unless board.valid_pos?(pos)
 
     @color = color
     @board = board
     @pos = pos
 
-    # board.add_piece(self, pos)
+    board.add_piece(self, pos)
   end
 
   def to_s

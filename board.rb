@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require 'byebug'
 
 class Board
   attr_reader :board
@@ -18,19 +19,27 @@ class Board
   end
 
   def populate_back_row(color)
+    # debugger
     row = (color == :white) ? 7 : 0
     pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
     pieces.each_with_index do |piece, col|
-      piece.new(color, @board, [row,col])
+      piece.new(color, self, [row,col])
     end
 
   end
 
+  def add_piece(piece, pos)
+    # debugger
+    i, j = pos
+    @board[i][j] = piece
+  end
+
   def populate_pawn(color)
+
     row = (color == :white) ? 6 : 1
-    8.times do | col|
-      Pawn.new(color, @board, [row,col])
+    8.times do |col|
+      Pawn.new(color, self, [row,col])
     end
   end
 
