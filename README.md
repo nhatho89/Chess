@@ -16,4 +16,4 @@ Full rule enforcements. Illegal moves are blocked. Players are notified is state
 
 ## Screen Shots
 
-![alt tag](./screenshot/Snip20160315_2.png)
+![alt tag](./screenshot/chess.png)
