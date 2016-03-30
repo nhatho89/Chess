@@ -1,20 +1,23 @@
 module Stepping
   def moves
+
+    moves = []
     move_diffs.each do |move|
       dx, dy = move
       cur_x, cur_y = pos
       pos = [cur_x + dx, cur_y + dy]
 
-      next unless board.valid_pos?(pos)
+      next unless board.in_bounds?(pos)
 
       if board.empty?(pos)
         #moves here if empty
-        return pos
+        moves << pos
       elsif board[pos].color != color
         #moves here if piece on there is not the same color
-        return pos
+        moves << pos
       end
     end
+    moves
   end
 
   private

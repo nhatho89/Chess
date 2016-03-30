@@ -48,7 +48,7 @@ module Sliding
       cur_x, cur_y = cur_x + dx, cur_y + dy
       pos = [cur_x, cur_y]
 
-      break unless board.valid_pos?(pos)
+      break unless board.in_bounds?(pos)
 
       if board.empty?(pos)
         moves << pos

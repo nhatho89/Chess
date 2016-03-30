@@ -7,9 +7,10 @@ class Pawn < Piece
 
   def moves
     forward_steps + side_attacks
+
   end
 
-  private
+  # private
 
   def at_start_row?
     pos[0] == ((color == :white) ? 6 : 1)
@@ -25,7 +26,7 @@ class Pawn < Piece
     # one position ahead of pawn
     one_step = [i + forward_dir, j]
     #checks to make sure one step ahead is within board boundaries and empty
-    return [] unless board.valid_pos?(one_step) && board.empty?(one_step)
+    return [] unless board.in_bounds?(one_step) && board.empty?(one_step)
     #adds to array of possible move if valid
     steps = [one_step]
 
@@ -41,11 +42,12 @@ class Pawn < Piece
 
     side_moves.select do |new_pos|
       #not selected if invalid position
-      next false unless board.valid_pos?(new_pos)
+      next false unless board.in_bounds?(new_pos)
       #not selected if pos is empty
       next false if board.empty?(new_pos)
 
       # selects a piece if it is at the position and it is not the same color
+
       threatened_piece = board[new_pos]
       threatened_piece && threatened_piece.color != color
     end

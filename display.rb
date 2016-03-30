@@ -4,11 +4,12 @@ require_relative 'cursorable'
 
 
 class Display
-  attr_reader :board
+  include Cursorable
+  attr_reader :board, :notifications
   def initialize(board)
     @board = board
     @cursor_pos = [0, 0]
-
+    @notifications = {}
   end
 
   def render
@@ -26,5 +27,18 @@ class Display
       print "\n"
     end
 
+    @notifications.each do |key, val|
+      puts "#{val}"
+    end
+
   end
+
+  def set_check!
+    @notifications[:check] = "Check!"
+  end
+
+  def uncheck!
+    @notifications.delete(:check)
+  end
+
 end

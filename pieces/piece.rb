@@ -13,7 +13,7 @@ class Piece
     @board = board
     @pos = pos
 
-    board.add_piece(self, pos)
+    @board.add_piece(self, pos)
   end
 
   def to_s
@@ -30,15 +30,15 @@ class Piece
   end
 
   def valid_moves
-    moves.reject { |to_pos| move_into_check?(to_pos) }
+    moves.reject { |to| move_into_check?(to) }
   end
 
   private
 
-  def move_into_check?(to_pos)
+  def move_into_check?(to)
     test_board = board.dup
-    test_board.move_piece!(pos, to_pos)
-    test_board.in_check?(color)
+    test_board.move_piece!(pos, to)
+    test_board.check?(color)
   end
 
 end
