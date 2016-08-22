@@ -26,11 +26,15 @@ class Display
       end
       print "\n"
     end
-
+    
     @notifications.each do |key, val|
       puts "#{val}"
     end
 
+  end
+
+  def reset!
+    @notifications.delete(:error)
   end
 
   def set_check!

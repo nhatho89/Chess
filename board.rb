@@ -10,15 +10,6 @@ class Board
     populate_grid if populate_board
   end
 
-  # def move(start, end_pos)
-  #   if @board[start[0]][start[1]].is_a? Blank
-  #     raise "Invalid starting position!"
-  #   else
-  #     @board[end_pos[0]][end_pos[1]] = @board[start[0]][start[1]]
-  #     @board[start[0]][start[1]] = Blank.instance
-  #   end
-  # end
-
   def [](pos)
     raise 'invalid pos' unless in_bounds?(pos)
 
@@ -100,6 +91,7 @@ class Board
   end
 
   def empty?(pos)
+    # debugger
     @board[pos[0]][pos[1]].color == :none
   end
 
@@ -115,7 +107,7 @@ class Board
     all_pieces.select { |piece| piece.color == color && piece.is_a?(King) }
   end
 
-  def check?(color)
+  def in_check?(color)
     # debugger
     king_pos = find_king(color).first.pos
 

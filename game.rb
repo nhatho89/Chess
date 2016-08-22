@@ -1,10 +1,10 @@
 require_relative 'board'
-require_relative 'player'
+require_relative 'human_player'
 require_relative 'display'
 require 'byebug'
 
 class Game
-  attr_reader :board, :display, :players, :current_player#, :current_player, :players
+  attr_reader :board, :display, :players, :current_player
 
   def initialize
     @board = Board.new
@@ -13,37 +13,34 @@ class Game
       white: HumanPlayer.new(:white, @display),
       black: HumanPlayer.new(:black, @display)
     }
-
     @current_player = :white
   end
 
   def play
     until @board.checkmate?(current_player)
-      # begin
-        # @display.render
-        # @display.cursor
+      begin
         from_pos, to_pos = players[current_player].make_move(board)
         board.move_piece(current_player, from_pos, to_pos)
   #
         swap_turn!
         notify_players
-      # rescue StandardError => e
-      #   @display.notifications[:error] = e.message
-      #   retry
-      # end
+      rescue StandardError => e
+        @display.notifications[:error] = e.message
+        retry
+      end
     end
-  #
+
     @display.render
-  #   puts "#{current_player} is checkmated."
-  #
-  #   nil
+    puts "#{current_player} is checkmated."
+
+    nil
   end
 
   def notify_players
-    if board.check?(current_player)
-      display.set_check!
+    if @board.in_check?(current_player)
+      @display.set_check!
     else
-      display.uncheck!
+      @display.uncheck!
     end
   end
 
